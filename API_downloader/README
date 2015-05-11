@@ -1,0 +1,67 @@
+Readme for using the MG-RAST API downloader script, found here.
+
+Last updated: May 11, 2015
+
+To download many of the processed files from the MG-RAST metagenomics analysis server,
+it is necessary to use their API interface.  More info on this interface can be found
+at:
+
+http://api.metagenomics.anl.gov/api.html
+
+Unfortunately, when downloading multiple files, it becomes necessary to generate many
+different, complex pull requests.  This script, MG-RAST_API_downloader.py, is designed
+to make generating these pull requests a little easier.
+
+For a single file, simply start the script with:
+
+$ python MG-RAST_API_downloader.py
+
+Then, you will need to make several selections on the command line.
+
+First, you will need to note which reference you would like the annotations from.  MG-
+RAST provides annotations taken from many different reference databases; the full list
+can be found on the API documentation link given above.
+
+Next, you will need to choose the annotation type.  MG-RAST will provide, on a line by
+line basis, the best match for organism, feature, function, or ontology.  If you want
+all of these combined, you will need to download each individual file and then merge
+them.
+
+You will also need the MG-RAST ID, which can be found at the top of each project page.
+It generally has a format something like "456182.3".
+
+You will also need your authorization key.  If you don't have this key, click the little
+figure of a person at the top of the MG-RAST site, by your username.  Select 
+"Preferences", and then click on "Generate a new authorization key".  PLEASE NOTE that 
+this key will NOT be activated until you save your information at the bottom of the page!
+
+Furthermore, this key is only good for 10 days past the date of generation.  Expect
+to have to repeat the authorization key generation several times for large projects.
+
+Finally, you need to designate the name of the output file.  This will be a tab-
+delimited file containing your requested information, one line per read.
+
+Press enter after providing this information, and the requested file will automatically
+begin to download.  When the cursor drops to below the download display, the file 
+download is complete.
+
+----
+
+If you are handling multiple downloads, this script also allows for a single command
+to launch a download, without having to provide each piece of information separately.
+The order for that is:
+
+$ python MG-RAST_API_downloader.py #Database #Annotation_type #Authorization #File_ID #output_name
+
+Simply replace each variable in the line with the response.  
+
+A sample command:
+
+$ python python ~/Desktop/Projects/SuperScripts/MG-RAST_API_downloader.py RefSeq organism 
+YWxskhiiQVFXBXAbsthkd9t5X 462111.3 RefSeq_org_SRR1111.tab
+
+Multiple commands can thus be constructed and run through the use of a bash script.
+
+----
+
+For troubleshooting, or if you encounter an issue, please message me through GitHub.
